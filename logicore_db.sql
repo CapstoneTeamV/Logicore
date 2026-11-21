@@ -30,21 +30,17 @@ CREATE TABLE `l_receiptstatus` (
 
 -- -----------------------------------------------------
 -- 3. Table `logicore`.`l_employees`
--- Ρόλοι (emp_role): 1 = Admin, 2 = Υπάλληλος, 3 = Αποθηκάριος, 4 = Διευθυντής
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `l_employees`;
 CREATE TABLE `l_employees` (
   `emp_id` INT NOT NULL,
   `emp_code` VARCHAR(20) NOT NULL,
   `emp_name` VARCHAR(60) NULL,
-  `emp_role` INT NOT NULL,
   `emp_ord_status_id` INT NOT NULL,
   `emp_rct_status_id` INT NOT NULL,
   PRIMARY KEY (`emp_id`),
-  UNIQUE INDEX `emp_code_UNIQUE` (`emp_code` ASC) VISIBLE,
   INDEX `emp_ord_status_id_idx` (`emp_ord_status_id` ASC) VISIBLE,
   INDEX `emp_rct_status_id_idx` (`emp_rct_status_id` ASC) VISIBLE,
-  CONSTRAINT `chk_emp_role` CHECK (`emp_role` IN (1, 2, 3, 4)),
   CONSTRAINT `l_employees_ibfk_1`
     FOREIGN KEY (`emp_ord_status_id`)
     REFERENCES `l_orderstatus` (`O_Status_ID`),
@@ -211,9 +207,8 @@ INSERT INTO `l_receiptstatus` (`R_Status_ID`, `R_Status_Code`) VALUES
 (2, 'Παραλήφθηκε'),
 (3, 'Ακυρώθηκε');
 
--- 1: Admin, 2: Υπάλληλος, 3: Αποθηκάριος, 4: Διευθυντής (με NULL όνομα αρχικά)
-INSERT INTO `l_employees` (`emp_id`, `emp_code`, `emp_name`, `emp_role`, `emp_ord_status_id`, `emp_rct_status_id`) VALUES
-(1, 'Admin', NULL, 1, 1, 1),
-(2, 'Υπάλληλος', NULL, 2, 1, 1),
-(3, 'Αποθηκάριος', NULL, 3, 1, 1),
-(4, 'Διευθυντής', NULL, 4, 1, 1);
+INSERT INTO `l_employees` (`emp_id`, `emp_code`, `emp_name`, `emp_ord_status_id`, `emp_rct_status_id`) VALUES
+(1, 'Admin', NULL, 1, 1),
+(2, 'Υπάλληλος', NULL, 1, 1),
+(3, 'Αποθηκάριος', NULL, 1, 1),
+(4, 'Διευθυντής', NULL, 1, 1);
