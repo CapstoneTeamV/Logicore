@@ -14,7 +14,7 @@ CREATE TABLE `l_orderstatus` (
   `O_Status_ID` INT NOT NULL,
   `O_Status_Code` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`O_Status_ID`),
-  UNIQUE INDEX `O_Status_Code_UNIQUE` (`O_Status_Code` ASC) VISIBLE
+  UNIQUE INDEX `O_Status_Code_UNIQUE` (`O_Status_Code` DESC) VISIBLE
 ) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -25,7 +25,7 @@ CREATE TABLE `l_receiptstatus` (
   `R_Status_ID` INT NOT NULL,
   `R_Status_Code` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`R_Status_ID`),
-  UNIQUE INDEX `R_Status_Code_UNIQUE` (`R_Status_Code` ASC) VISIBLE
+  UNIQUE INDEX `R_Status_Code_UNIQUE` (`R_Status_Code` desc) VISIBLE
 ) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -39,8 +39,8 @@ CREATE TABLE `l_employees` (
   `emp_ord_status_id` INT NOT NULL,
   `emp_rct_status_id` INT NOT NULL,
   PRIMARY KEY (`emp_id`),
-  INDEX `emp_ord_status_id_idx` (`emp_ord_status_id` ASC) VISIBLE,
-  INDEX `emp_rct_status_id_idx` (`emp_rct_status_id` ASC) VISIBLE,
+  INDEX `emp_ord_status_id_idx` (`emp_ord_status_id` desc) VISIBLE,
+  INDEX `emp_rct_status_id_idx` (`emp_rct_status_id` desc) VISIBLE,
   CONSTRAINT `l_employees_ibfk_1`
     FOREIGN KEY (`emp_ord_status_id`)
     REFERENCES `l_orderstatus` (`O_Status_ID`),
