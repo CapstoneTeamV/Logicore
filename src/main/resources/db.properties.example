@@ -1,0 +1,5 @@
+# Αντέγραψε αυτό το αρχείο ως db.properties και βάλε τα δικά σου στοιχεία.
+# Το db.properties ΔΕΝ ανεβαίνει στο Git (.gitignore).
+db.url=jdbc:mysql://localhost:3306/logicore
+db.user=logicore
+db.password=CHANGE_ME

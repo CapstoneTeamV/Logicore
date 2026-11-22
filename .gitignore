@@ -22,3 +22,19 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# ---- Προσθήκες για Maven / IDE ----
+target/
+out/
+.idea/workspace.xml
+.vscode/
+.settings/
+.project
+.classpath
+nbproject/
+.DS_Store
+Thumbs.db
+
+# Κωδικοί βάσης: ΠΟΤΕ στο Git. Ανεβαίνει μόνο το db.properties.example
+src/main/resources/db.properties
+.env
