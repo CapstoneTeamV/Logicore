@@ -26,13 +26,15 @@ src/main/java/com/logicore/
 ├── service/   Επιχειρησιακοί κανόνες
 └── Main.java  Σημείο εκκίνησης
 src/main/resources/   Ρυθμίσεις (db.properties.example)
-logicore_db.sql       Σχήμα της βάσης (MySQL)
 src/test/java/        JUnit 5 tests (ίδια packages με τον κώδικα)
 config/               Κανόνες Checkstyle και SpotBugs
 .github/              CI (GitHub Actions) και πρότυπο Pull Request
 docs/                 Έγγραφα του project (Case Study, σχήμα βάσης)
-Classes.Logicor/      Πρώτες κλάσεις (VS Code). Θα μεταφερθούν στα packages του src/main/java
+logicore_db.sql       Σχήμα της βάσης (MySQL)
 ```
+
+Οι πρώτες κλάσεις του Σταμάτη (`Classes.Logicor`) φυλάσσονται στο branch
+`archive/stamatis-classes-22-11` και θα μπουν στα packages όταν ξεκινήσει ο κώδικας.
 
 ## Κανόνες ομάδας
 1. Κανείς δεν κάνει push απευθείας στο `main`.
