@@ -1,0 +1,4 @@
+# Ίδιες αλλαγές γραμμής (LF) για Windows και Mac, ώστε να μη βγαίνουν "ψεύτικες" αλλαγές
+* text=auto eol=lf
+*.png binary
+*.jpg binary

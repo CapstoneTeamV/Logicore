@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Εξαιρέσεις SpotBugs. Εδώ προσθέτουμε ελέγχους που θέλουμε να αγνοηθούν, με σχόλιο για τον λόγο. -->
+<FindBugsFilter>
+</FindBugsFilter>

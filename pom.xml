@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Ταυτότητα του project -->
+  <groupId>com.logicore</groupId>
+  <artifactId>logicore-3pl</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>LogiCore 3PL</name>
+  <description>Σύστημα διαχείρισης παλετών και αποστολών 3PL (Capstone, Ομάδα 5)</description>
+
+  <properties>
+    <maven.compiler.release>17</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <junit.version>5.11.3</junit.version>
+    <mysql.version>9.1.0</mysql.version>
+  </properties>
+
+  <dependencies>
+    <!-- Οδηγός JDBC για MySQL (η βάση μας, βλ. logicore_db.sql) -->
+    <dependency>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
+      <version>${mysql.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- JUnit 5 μόνο για τα tests -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- 1. Όλοι με Java 17+ και Maven 3.8+ -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>enforce-versions</id>
+            <goals><goal>enforce</goal></goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion><version>[17,)</version></requireJavaVersion>
+                <requireMavenVersion><version>[3.8,)</version></requireMavenVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- 2. Compiler: προειδοποιήσεις για ύποπτο κώδικα -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <compilerArgs><arg>-Xlint:all</arg></compilerArgs>
+        </configuration>
+      </plugin>
+
+      <!-- 3. Tests (JUnit 5) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.2</version>
+      </plugin>
+
+      <!-- 4. Checkstyle: κανόνες γραφής (ονόματα, imports, μέγεθος μεθόδων). Σπάει το build σε error. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.6.0</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>10.20.1</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <configLocation>config/checkstyle.xml</configLocation>
+          <consoleOutput>true</consoleOutput>
+          <failOnViolation>true</failOnViolation>
+          <violationSeverity>error</violationSeverity>
+          <includeTestSourceDirectory>true</includeTestSourceDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <id>checkstyle</id>
+            <phase>validate</phase>
+            <goals><goal>check</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- 5. SpotBugs: ψάχνει πιθανά bugs (null, ίσα με ==, resources που δεν κλείνουν) -->
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>4.8.6.6</version>
+        <configuration>
+          <effort>Max</effort>
+          <threshold>High</threshold>
+          <failOnError>true</failOnError>
+          <excludeFilterFile>config/spotbugs-exclude.xml</excludeFilterFile>
+        </configuration>
+        <executions>
+          <execution>
+            <id>spotbugs</id>
+            <phase>verify</phase>
+            <goals><goal>check</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- 6. JaCoCo: πόσο από τον κώδικα καλύπτουν τα tests (αναφορά στο target/site/jacoco) -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.12</version>
+        <executions>
+          <execution><id>prepare</id><goals><goal>prepare-agent</goal></goals></execution>
+          <execution><id>report</id><phase>verify</phase><goals><goal>report</goal></goals></execution>
+        </executions>
+      </plugin>
+
+      <!-- 7. mvn exec:java τρέχει το Main -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.5.0</version>
+        <configuration>
+          <mainClass>com.logicore.Main</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+  "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<!--
+  Κανόνες γραφής κώδικα της ομάδας LogiCore.
+  severity=error  : σπάει το build (πρέπει να διορθωθεί πριν το merge).
+  severity=warning: εμφανίζεται μόνο ως υπόδειξη.
+-->
+<module name="Checker">
+  <property name="charset" value="UTF-8"/>
+  <property name="severity" value="error"/>
+  <property name="fileExtensions" value="java"/>
+
+  <module name="FileTabCharacter"/>                 <!-- spaces, όχι tabs -->
+  <module name="NewlineAtEndOfFile"/>
+  <module name="LineLength">
+    <property name="max" value="140"/>
+    <property name="severity" value="warning"/>
+  </module>
+
+  <module name="TreeWalker">
+    <!-- Ονόματα -->
+    <module name="TypeName"/>                        <!-- κλάσεις: PalletService -->
+    <module name="MethodName"/>                      <!-- μέθοδοι: findById -->
+    <module name="MemberName"/>                      <!-- πεδία: customerId -->
+    <module name="ParameterName"/>
+    <module name="LocalVariableName"/>
+    <module name="ConstantName"/>                    <!-- σταθερές: MAX_PALLETS -->
+    <module name="PackageName">
+      <property name="format" value="^com\.logicore(\.[a-z][a-z0-9]*)*$"/>
+    </module>
+
+    <!-- Imports -->
+    <module name="UnusedImports"/>
+    <module name="RedundantImport"/>
+
+    <!-- Συχνά λάθη -->
+    <module name="EqualsHashCode"/>                  <!-- equals χωρίς hashCode -->
+    <module name="StringLiteralEquality"/>           <!-- strings με == -->
+    <module name="EmptyCatchBlock"/>                 <!-- catch που "τρώει" το λάθος -->
+    <module name="MissingSwitchDefault"/>
+    <module name="FallThrough"/>
+    <module name="OneStatementPerLine">
+      <property name="severity" value="warning"/>
+    </module>
+
+    <!-- Μέγεθος και πολυπλοκότητα (υποδείξεις) -->
+    <module name="MethodLength">
+      <property name="max" value="80"/>
+      <property name="severity" value="warning"/>
+    </module>
+    <module name="ParameterNumber">
+      <property name="max" value="8"/>
+      <property name="severity" value="warning"/>
+    </module>
+    <module name="CyclomaticComplexity">
+      <property name="max" value="12"/>
+      <property name="severity" value="warning"/>
+    </module>
+
+    <!-- Τεκμηρίωση: κάθε public κλάση έχει σχόλιο /** ... */ -->
+    <module name="MissingJavadocType">
+      <property name="scope" value="public"/>
+      <property name="severity" value="warning"/>
+    </module>
+  </module>
+</module>
