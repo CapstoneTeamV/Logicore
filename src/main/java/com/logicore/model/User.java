@@ -26,7 +26,7 @@ public class User {
     private Integer userId;         // null μέχρι να αποθηκευτεί
     private String  username;       // για τη σύνδεση, μοναδικό
     private String  fullName;
-    private String  passwordHash;   // ποτέ ο κωδικός σε καθαρό κείμενο
+    private String  password;       // απλό κείμενο προς το παρόν (στήλη password_hash)
     private Role    role;
     private boolean active = true;
 
@@ -34,10 +34,10 @@ public class User {
     }
 
     // μόνο τα υποχρεωτικά πεδία, τα υπόλοιπα με setters
-    public User(String username, String fullName, String passwordHash, Role role) {
+    public User(String username, String fullName, String password, Role role) {
         this.username = requireText(username, "Όνομα χρήστη", 50);
         this.fullName = requireText(fullName, "Ονοματεπώνυμο", 100);
-        this.passwordHash = requireText(passwordHash, "Κωδικός", 255);
+        this.password = requireText(password, "Κωδικός", 255);
         this.role = requireRole(role);
     }
 
@@ -65,12 +65,12 @@ public class User {
         this.fullName = requireText(fullName, "Ονοματεπώνυμο", 100);
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = requireText(passwordHash, "Κωδικός", 255);
+    public void setPassword(String password) {
+        this.password = requireText(password, "Κωδικός", 255);
     }
 
     public Role getRole() {
@@ -79,6 +79,11 @@ public class User {
 
     public void setRole(Role role) {
         this.role = requireRole(role);
+    }
+
+    /** Στη σύνδεση: true αν ο κωδικός που έγραψε ο χρήστης ταιριάζει. */
+    public boolean checkPassword(String typedPassword) {
+        return password != null && password.equals(typedPassword);
     }
 
     public boolean isActive() {
