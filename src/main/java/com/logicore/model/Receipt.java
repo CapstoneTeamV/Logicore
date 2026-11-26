@@ -1,3 +1,4 @@
+package com.logicore.model;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class Receipt {
     private ZonedDateTime announcedAt;
     private ZonedDateTime receivedAt;
 
-    private ArrayList<Palette> palettes;
+    private ArrayList<Pallet> pallets;
 
     public int getReceiptId() {
         return receiptID;
@@ -38,23 +39,81 @@ public class Receipt {
 
     // constructor
 
-    public Receipt(User creator, Customer customer, ZonedDateTime time) {
+    public Receipt(User creator, Customer customer) {
         this.receiptID = ++Receipt.id_counter;
-        this.announcedAt = time;
+
         this.creator = creator;
         this.customer = customer;
+        
+        this.announcedAt = ZonedDateTime.now();
         this.status = ReceiptStatus.Status.ANNOUNCED;
     }
 
     // need Palette constructor
-    public addPalette(Palette palette) {
-        palettes.add(palette);
+    public void addPallet(Pallet pallet) {
+        pallets.add(pallet);
     }
 
     // παραλαβή παραγγελίας
 
     public void ReceiveReceipt() {
 
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public User getReceiver() {
+        return receiver;
+    }
+
+    public ZonedDateTime getAnnouncedAt() {
+        return announcedAt;
+    }
+
+    public ZonedDateTime getReceivedAt() {
+        return receivedAt;
+    }
+
+    public ArrayList<Pallet> getPallets() {
+        return pallets;
+    }
+
+    public void setReceiptID(int receiptID) {
+        this.receiptID = receiptID;
+    }
+
+    public void setReceiptCode(String receiptCode) {
+        this.receiptCode = receiptCode;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
+    }
+
+    public void setStatus(ReceiptStatus.Status status) {
+        this.status = status;
+    }
+
+    public void setReceivedAt(ZonedDateTime receivedAt) {
+        this.receivedAt = receivedAt;
+    }
+
+    public void setPallets(ArrayList<Pallet> pallets) {
+        this.pallets = pallets;
     }
 
 }
