@@ -38,3 +38,4 @@ Thumbs.db
 # Κωδικοί βάσης: ΠΟΤΕ στο Git. Ανεβαίνει μόνο το db.properties.example
 src/main/resources/db.properties
 .env
+.idea
