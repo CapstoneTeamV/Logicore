@@ -1,0 +1,10 @@
+SELECT *
+FROM l_items
+INNER JOIN l_depositors    ON item_dpt_id   = dpt_id
+INNER JOIN l_location      ON item_loc_id   = loc_id
+INNER JOIN l_receipts      ON item_id       = rct_Item_id
+INNER JOIN l_truck         ON rct_truck_id  = trk_Id
+INNER JOIN l_employees     ON rct_emp_id    = emp_id
+INNER JOIN l_receiptstatus ON rct_status_Id = R_Status_ID
+LEFT JOIN  l_orders        ON item_id       = ord_Item_id
+LEFT JOIN  l_orderstatus   ON ord_status_id = O_Status_ID;
